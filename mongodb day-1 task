@@ -1,0 +1,26 @@
+//Q:Find all the information about each products
+db.products.find()
+//Q :Find the product price which are between 400 to 800
+//shows products within price range
+db.products.find({price:{$gt:400,$lt:800}})
+//shows only price of product
+db.products.find({product_price:{$gt:400,$lt:800}},{product_price:1})
+//Q:Find the product price which are not between 400 to 600
+//shows products not in price range
+db.products.find({ product_price: { $not: { $gte: 400, $lte: 600 } } })
+// shows only price not in range
+db.products.find({ product_price: { $not: { $gte: 400, $lte: 600 } } }, { product_price: 1 })
+//Q:List the four product which are grater than 500 in price
+//shows 4 product details having price greater than 500
+db.products.find({product_price:{$gt:500}}).limit(4)
+// shows 4 product name ,price having price greater than 500
+db.products.find({product_price:{$gt:500}},{product_name:1,product_price:1}).limit(4)
+//Q:Find the product name and product material of each products
+db.products.find({},{product_name:1,product_material:1})
+//Q:Find the product with a row id of 10
+db.products.find({id:"10"})
+//Q:Find products which contain product color indigo  and product price 492.00
+//show products either has color indigo or having price 492
+db.products.find({$or:[{product_color:"indigo"},{product_price:492}]})
+//shows product having color indigo and price 492
+db.products.find({$and:[{product_color:"indigo"},{product_price:492}]})
